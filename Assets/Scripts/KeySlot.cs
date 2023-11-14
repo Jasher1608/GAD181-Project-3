@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class KeySlot : MonoBehaviour
 {
@@ -8,6 +10,9 @@ public class KeySlot : MonoBehaviour
 
     public Key key;
     public PlayerNumber playerNumber;
+
+    KeyCode[] playerOneKeys = { KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.Z, KeyCode.X, KeyCode.C };
+    KeyCode[] playerTwoKeys = { KeyCode.Keypad1, KeyCode.Keypad2, KeyCode.Keypad3, KeyCode.Keypad4, KeyCode.Keypad5, KeyCode.Keypad6, KeyCode.Keypad7, KeyCode.Keypad8, KeyCode.Keypad9 };
 
     [SerializeField] private int slotNumber;
 
@@ -18,6 +23,8 @@ public class KeySlot : MonoBehaviour
     private bool isCycling = false;
 
     private Animator animator;
+
+    [SerializeField] private Color incorrectColour;
     
     void Start()
     {
@@ -26,11 +33,54 @@ public class KeySlot : MonoBehaviour
 
     void Update()
     {
-        if (slotNumber == 1)
+        if (slotNumber == 1 && !isCycling)
         {
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), System.Enum.GetName(typeof(Key), key))) && !isCycling)
+            CheckInput();
+        }
+    }
+
+    private void CheckInput() // Bad code, needs rewriting
+    {
+        if (playerNumber == PlayerNumber.PlayerOne)
+        {
+            // Iterate through Player One's keys
+            foreach (KeyCode key in playerOneKeys)
             {
-                StartCoroutine(CorrectKeyInput());
+                if (Input.GetKeyDown(key))
+                {
+                    // Check if the pressed key is the correct key
+                    if (key == (KeyCode)Enum.Parse(typeof(KeyCode), Enum.GetName(typeof(Key), this.key)) && !isCycling)
+                    {
+                        StartCoroutine(CorrectKeyInput());
+                    }
+                    else
+                    {
+                        StartCoroutine(IncorrectKeyInput());
+                    }
+                    // Exit the loop to avoid checking unnecessary keys after one is found
+                    break;
+                }
+            }
+        }
+        else if (playerNumber == PlayerNumber.PlayerTwo)
+        {
+            // Iterate through Player Two's keys
+            foreach (KeyCode key in playerTwoKeys)
+            {
+                if (Input.GetKeyDown(key))
+                {
+                    // Check if the pressed key is the correct key
+                    if (key == (KeyCode)System.Enum.Parse(typeof(KeyCode), Enum.GetName(typeof(Key), this.key)) && !isCycling)
+                    {
+                        StartCoroutine(CorrectKeyInput());
+                    }
+                    else
+                    {
+                        StartCoroutine(IncorrectKeyInput());
+                    }
+                    // Exit the loop to avoid checking unnecessary keys after one is found
+                    break;
+                }
             }
         }
     }
@@ -90,6 +140,23 @@ public class KeySlot : MonoBehaviour
 
             NewKey(slot3);
         }
+
+        isCycling = false;
+    }
+
+    private IEnumerator IncorrectKeyInput()
+    {
+        isCycling = true;
+
+        slot1.transform.GetChild(0).GetComponent<SpriteRenderer>().color = incorrectColour;
+        slot2.transform.GetChild(0).GetComponent<SpriteRenderer>().color = incorrectColour;
+        slot3.transform.GetChild(0).GetComponent<SpriteRenderer>().color = incorrectColour;
+
+        yield return new WaitForSeconds(2f);
+
+        slot1.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+        slot2.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+        slot3.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
 
         isCycling = false;
     }
