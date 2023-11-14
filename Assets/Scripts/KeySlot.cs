@@ -14,6 +14,10 @@ public class KeySlot : MonoBehaviour
     [SerializeField] private GameObject slot1;
     [SerializeField] private GameObject slot2;
     [SerializeField] private GameObject slot3;
+
+    private bool isCycling = false;
+
+    private Animator animator;
     
     void Start()
     {
@@ -24,7 +28,10 @@ public class KeySlot : MonoBehaviour
     {
         if (slotNumber == 1)
         {
-            CheckInput();
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), System.Enum.GetName(typeof(Key), key))) && !isCycling)
+            {
+                StartCoroutine(CorrectKeyInput());
+            }
         }
     }
 
@@ -50,38 +57,41 @@ public class KeySlot : MonoBehaviour
         }
     }
 
-    public void CheckInput()
+    private IEnumerator CorrectKeyInput()
     {
-        if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), System.Enum.GetName(typeof(Key), key))))
+        //Debug.Log("You pressed the correct key!");
+
+        isCycling = true;
+        // Cycle keys
+        if (slot1.transform.childCount > 0)
         {
-            //Debug.Log("You pressed the correct key!");
+            animator = slot1.transform.GetChild(0).GetComponent<Animator>();
+            animator.SetTrigger("Pressed");
 
-            // Cycle keys
-            if (slot1.transform.childCount > 0)
-            {
-                Destroy(slot1.transform.GetChild(0).gameObject);
-            }
-
-            if (slot2.transform.childCount > 0)
-            {
-                Transform child = slot2.transform.GetChild(0);
-                child.SetParent(slot1.transform);
-                child.localPosition = new Vector3(0, 0, 0);
-
-                slot1.GetComponent<KeySlot>().key = slot2.GetComponent<KeySlot>().key;
-            }
-
-            if (slot3.transform.childCount > 0)
-            {
-                Transform child = slot3.transform.GetChild(0);
-                child.SetParent(slot2.transform);
-                child.localPosition = new Vector3(0, 0, 0);
-
-                slot2.GetComponent<KeySlot>().key = slot3.GetComponent<KeySlot>().key;
-
-                NewKey(slot3);
-            }
+            yield return new WaitForSeconds(0.17f);
         }
+
+        if (slot2.transform.childCount > 0)
+        {
+            Transform child = slot2.transform.GetChild(0);
+            child.SetParent(slot1.transform);
+            child.localPosition = new Vector3(0, 0, 0);
+
+            slot1.GetComponent<KeySlot>().key = slot2.GetComponent<KeySlot>().key;
+        }
+
+        if (slot3.transform.childCount > 0)
+        {
+            Transform child = slot3.transform.GetChild(0);
+            child.SetParent(slot2.transform);
+            child.localPosition = new Vector3(0, 0, 0);
+
+            slot2.GetComponent<KeySlot>().key = slot3.GetComponent<KeySlot>().key;
+
+            NewKey(slot3);
+        }
+
+        isCycling = false;
     }
 }
 
