@@ -8,38 +8,79 @@ public class KeySlot : MonoBehaviour
 
     public Key key;
     public PlayerNumber playerNumber;
+
+    [SerializeField] private int slotNumber;
+
+    [SerializeField] private GameObject slot1;
+    [SerializeField] private GameObject slot2;
+    [SerializeField] private GameObject slot3;
     
-    // Start is called before the first frame update
     void Start()
+    {
+        NewKey(this.gameObject);
+    }
+
+    void Update()
+    {
+        if (slotNumber == 1)
+        {
+            CheckInput();
+        }
+    }
+
+    public void NewKey(GameObject slot)
     {
         if (playerNumber == PlayerNumber.PlayerOne)
         {
-            key = (Key)Random.Range(0, 8);
+            slot.GetComponent<KeySlot>().key = (Key)Random.Range(0, 8);
         }
         else if (playerNumber == PlayerNumber.PlayerTwo)
         {
-            key = (Key)Random.Range(9, 17);
+            slot.GetComponent<KeySlot>().key = (Key)Random.Range(9, 17);
         }
 
-        NewKey();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void NewKey()
-    {
-        var prefab = keySlotManager.GetKeyPrefab(key);
+        var prefab = keySlotManager.GetKeyPrefab(slot.GetComponent<KeySlot>().key);
         if (prefab != null)
         {
-            Instantiate(prefab, this.transform);
+            Instantiate(prefab, slot.transform);
         }
         else if (prefab == null)
         {
             Debug.LogError("Could not find prefab for " + key);
+        }
+    }
+
+    public void CheckInput()
+    {
+        if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), System.Enum.GetName(typeof(Key), key))))
+        {
+            //Debug.Log("You pressed the correct key!");
+
+            // Cycle keys
+            if (slot1.transform.childCount > 0)
+            {
+                Destroy(slot1.transform.GetChild(0).gameObject);
+            }
+
+            if (slot2.transform.childCount > 0)
+            {
+                Transform child = slot2.transform.GetChild(0);
+                child.SetParent(slot1.transform);
+                child.localPosition = new Vector3(0, 0, 0);
+
+                slot1.GetComponent<KeySlot>().key = slot2.GetComponent<KeySlot>().key;
+            }
+
+            if (slot3.transform.childCount > 0)
+            {
+                Transform child = slot3.transform.GetChild(0);
+                child.SetParent(slot2.transform);
+                child.localPosition = new Vector3(0, 0, 0);
+
+                slot2.GetComponent<KeySlot>().key = slot3.GetComponent<KeySlot>().key;
+
+                NewKey(slot3);
+            }
         }
     }
 }

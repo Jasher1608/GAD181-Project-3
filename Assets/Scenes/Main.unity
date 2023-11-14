@@ -223,6 +223,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 0
+  slotNumber: 2
+  slot1: {fileID: 768739340}
+  slot2: {fileID: 17678730}
+  slot3: {fileID: 240091128}
 --- !u!1 &55051063
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +618,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 0
+  slotNumber: 3
+  slot1: {fileID: 768739340}
+  slot2: {fileID: 17678730}
+  slot3: {fileID: 240091128}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1397,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 0
+  slotNumber: 1
+  slot1: {fileID: 768739340}
+  slot2: {fileID: 17678730}
+  slot3: {fileID: 240091128}
 --- !u!1 &809010272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1729,6 +1741,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 1
+  slotNumber: 2
+  slot1: {fileID: 1553998657}
+  slot2: {fileID: 920867357}
+  slot3: {fileID: 1923070537}
 --- !u!1 &1008154167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,6 +2271,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 1
+  slotNumber: 1
+  slot1: {fileID: 1553998657}
+  slot2: {fileID: 920867357}
+  slot3: {fileID: 1923070537}
 --- !u!1 &1706676428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,6 +2763,10 @@ MonoBehaviour:
   keySlotManager: {fileID: 1199910127}
   key: 0
   playerNumber: 1
+  slotNumber: 3
+  slot1: {fileID: 1553998657}
+  slot2: {fileID: 920867357}
+  slot3: {fileID: 1923070537}
 --- !u!1 &2041588952
 GameObject:
   m_ObjectHideFlags: 0
