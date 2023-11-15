@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 0
   slotNumber: 2
@@ -228,6 +229,7 @@ MonoBehaviour:
   slot2: {fileID: 17678730}
   slot3: {fileID: 240091128}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &55051063
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 0
   slotNumber: 3
@@ -624,6 +627,7 @@ MonoBehaviour:
   slot2: {fileID: 17678730}
   slot3: {fileID: 240091128}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 0
   slotNumber: 1
@@ -1404,6 +1409,7 @@ MonoBehaviour:
   slot2: {fileID: 17678730}
   slot3: {fileID: 240091128}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &809010272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,7 +1516,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!224 &851929364
 RectTransform:
@@ -1742,6 +1748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 1
   slotNumber: 2
@@ -1749,6 +1756,7 @@ MonoBehaviour:
   slot2: {fileID: 920867357}
   slot3: {fileID: 1923070537}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &1008154167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,9 +2088,10 @@ GameObject:
   - component: {fileID: 1313965752}
   - component: {fileID: 1313965751}
   - component: {fileID: 1313965750}
+  - component: {fileID: 1313965753}
   m_Layer: 0
   m_Name: Wizard
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2175,6 +2184,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1313965753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313965749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b85775e69e47cc40b430d3b21c95cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 0
+  maxHealth: 25
+  health: 25
+  healthSlider: {fileID: 752998623}
+  playerOne: {fileID: 1313965749}
+  playerTwo: {fileID: 2107574131}
+  fireBallProjectile: {fileID: 5062444121245756137, guid: f051a1ac992a66e49a563d5aa153881a, type: 3}
+  witchProjectile: {fileID: 2210281119123016964, guid: 7114f5c7dd9e9da40ab41877b143c587, type: 3}
 --- !u!1 &1553998657
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,6 +2302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 1
   slotNumber: 1
@@ -2280,6 +2310,7 @@ MonoBehaviour:
   slot2: {fileID: 920867357}
   slot3: {fileID: 1923070537}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &1706676428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keySlotManager: {fileID: 1199910127}
+  playerController: {fileID: 0}
   key: 0
   playerNumber: 1
   slotNumber: 3
@@ -2773,6 +2805,7 @@ MonoBehaviour:
   slot2: {fileID: 920867357}
   slot3: {fileID: 1923070537}
   incorrectColour: {r: 0.4245283, g: 0.026032407, b: 0.026032407, a: 1}
+  combo: 0
 --- !u!1 &2041588952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,9 +3020,10 @@ GameObject:
   - component: {fileID: 2107574134}
   - component: {fileID: 2107574133}
   - component: {fileID: 2107574132}
+  - component: {fileID: 2107574135}
   m_Layer: 0
   m_Name: Witch
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3082,6 +3116,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2107574135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107574131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b85775e69e47cc40b430d3b21c95cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 1
+  maxHealth: 25
+  health: 25
+  healthSlider: {fileID: 55051065}
+  playerOne: {fileID: 1313965749}
+  playerTwo: {fileID: 2107574131}
+  fireBallProjectile: {fileID: 5062444121245756137, guid: f051a1ac992a66e49a563d5aa153881a, type: 3}
+  witchProjectile: {fileID: 2210281119123016964, guid: 7114f5c7dd9e9da40ab41877b143c587, type: 3}
 --- !u!1 &2125554554
 GameObject:
   m_ObjectHideFlags: 0

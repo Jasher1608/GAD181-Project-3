@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class KeySlot : MonoBehaviour
 {
     [SerializeField] private KeySlotManager keySlotManager;
+    [SerializeField] private PlayerController playerController;
 
     public Key key;
     public PlayerNumber playerNumber;
@@ -25,6 +26,8 @@ public class KeySlot : MonoBehaviour
     private Animator animator;
 
     [SerializeField] private Color incorrectColour;
+
+    public int combo = 0;
     
     void Start()
     {
@@ -112,6 +115,9 @@ public class KeySlot : MonoBehaviour
         //Debug.Log("You pressed the correct key!");
 
         isCycling = true;
+
+        combo++;
+
         // Cycle keys
         if (slot1.transform.childCount > 0)
         {
@@ -141,12 +147,19 @@ public class KeySlot : MonoBehaviour
             NewKey(slot3);
         }
 
+        if (combo % 3 == 0)
+        {
+            StartCoroutine(playerController.Attack());
+        }
+
         isCycling = false;
     }
 
     private IEnumerator IncorrectKeyInput()
     {
         isCycling = true;
+
+        combo = 0;
 
         slot1.transform.GetChild(0).GetComponent<SpriteRenderer>().color = incorrectColour;
         slot2.transform.GetChild(0).GetComponent<SpriteRenderer>().color = incorrectColour;
