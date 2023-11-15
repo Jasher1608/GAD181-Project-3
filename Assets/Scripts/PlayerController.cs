@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator animator;
+
     public PlayerNumber playerNumber;
 
     public float maxHealth;
     public float health;
+    public bool isDead = false;
 
     [SerializeField] private Slider healthSlider;
 
@@ -22,18 +25,16 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         health = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
     }
 
-    private void Update()
-    {
-        
-    }
-
     public IEnumerator Attack()
     {
+        animator.SetTrigger("Attack");
+
         if (playerNumber == PlayerNumber.PlayerOne)
         {
             GameObject inst = Instantiate(fireBallProjectile, this.transform.position, Quaternion.identity);
@@ -49,6 +50,16 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if ((health - damage) > 0)
+        {
+            animator.SetTrigger("Hurt");
+        }
+        else if ((health - damage) <= 0)
+        {
+            animator.SetBool("isDead", true);
+            isDead = true;
+        }
+
         float endValue = health - damage;
         StartCoroutine(LerpHealthValue(endValue));
     }

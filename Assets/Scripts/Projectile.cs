@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float speed;
 
-    private Collider2D collider2D;
+    private new Collider2D collider2D;
     private PlayerController playerController;
 
     private void Start()
