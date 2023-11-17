@@ -36,7 +36,7 @@ public class KeySlot : MonoBehaviour
 
     void Update()
     {
-        if (slotNumber == 1 && !isCycling)
+        if (slotNumber == 1 && !isCycling && !PlayerController.isGameOver)
         {
             CheckInput();
         }

@@ -193,7 +193,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1102 &1258935758439366054
 AnimatorState:
   serializedVersion: 6
@@ -271,7 +271,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: e4a464aee3dcccb4b9663d81cb8f3233, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: isDead
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &6745602615030567891

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public float maxHealth;
     public float health;
-    public bool isDead = false;
+    public static bool isGameOver = false;
 
     [SerializeField] private Slider healthSlider;
 
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject witchProjectile;
 
     [SerializeField] private float lerpDuration;
+
+    [SerializeField] private TextMeshProUGUI gameOver;
 
     private void Start()
     {
@@ -57,7 +60,8 @@ public class PlayerController : MonoBehaviour
         else if ((health - damage) <= 0)
         {
             animator.SetBool("isDead", true);
-            isDead = true;
+            isGameOver = true;
+            Invoke(nameof(Death), 1f);
         }
 
         float endValue = health - damage;
@@ -95,6 +99,20 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(interval);
             gameObject.SetActive(true);
             yield return new WaitForSeconds(interval);
+        }
+    }
+
+    private void Death()
+    {
+        if (playerNumber == PlayerNumber.PlayerOne)
+        {
+            gameOver.text = "Player Two wins!";
+            gameOver.gameObject.SetActive(true);
+        }
+        else if (playerNumber == PlayerNumber.PlayerTwo)
+        {
+            gameOver.text = "Player One wins!";
+            gameOver.gameObject.SetActive(true);
         }
     }
 }
