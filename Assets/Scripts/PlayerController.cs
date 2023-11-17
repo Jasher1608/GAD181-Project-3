@@ -62,9 +62,10 @@ public class PlayerController : MonoBehaviour
 
         float endValue = health - damage;
         StartCoroutine(LerpHealthValue(endValue));
+        StartCoroutine(BlinkObject(healthSlider.gameObject, 3, 0.15f));
     }
 
-    IEnumerator LerpHealthValue(float endValue)
+    private IEnumerator LerpHealthValue(float endValue)
     {
         // Record the time at which the lerp starts
         float timeStartedLerping = Time.time;
@@ -84,5 +85,16 @@ public class PlayerController : MonoBehaviour
 
         healthSlider.value = endValue; // Ensure the final value is set
         health = endValue;
+    }
+
+    private IEnumerator BlinkObject(GameObject gameObject, int blinks, float interval)
+    {
+        for (int i = 0; i < blinks; i++)
+        {
+            gameObject.SetActive(false);
+            yield return new WaitForSeconds(interval);
+            gameObject.SetActive(true);
+            yield return new WaitForSeconds(interval);
+        }
     }
 }
