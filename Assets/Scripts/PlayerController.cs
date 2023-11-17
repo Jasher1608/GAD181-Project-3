@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,6 +33,17 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
+    }
+
+    private void Update()
+    {
+        if (isGameOver)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
     }
 
     public IEnumerator Attack()
@@ -106,12 +118,12 @@ public class PlayerController : MonoBehaviour
     {
         if (playerNumber == PlayerNumber.PlayerOne)
         {
-            gameOver.text = "Player Two wins!";
+            gameOver.text = "Player Two wins!" + "\n" + "Press 'R' to play again";
             gameOver.gameObject.SetActive(true);
         }
         else if (playerNumber == PlayerNumber.PlayerTwo)
         {
-            gameOver.text = "Player One wins!";
+            gameOver.text = "Player One wins!" + "\n" + "Press 'R' to play again";
             gameOver.gameObject.SetActive(true);
         }
     }
