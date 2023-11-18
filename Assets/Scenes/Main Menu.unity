@@ -1139,9 +1139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites: []
-  spritePerFrame: 6
+  spritePerFrame: 1
   loop: 1
   destroyOnEnd: 0
+  index: 0
+  frame: 0
 --- !u!114 &567932478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,9 +2503,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites: []
-  spritePerFrame: 6
+  spritePerFrame: 1
   loop: 1
   destroyOnEnd: 0
+  index: 0
+  frame: 0
 --- !u!114 &1579508327
 MonoBehaviour:
   m_ObjectHideFlags: 0
